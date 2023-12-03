@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid py-4">
+        <!-- Blog Article Header -->
+        <div class="row my-4">
+            <div class="col-lg-12">
+                <h2 class="text-center">Model Explanation</h2>
+                <p class="text-center text-muted">Our CatBoost model capabilities</p>
+            </div>
+        </div>
+
+        <!-- Section 1: Reducing the Company’s Supply Chain Carbon Footprint -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Variables</h3>
+                <p>Our model takes into account several macroeconomic variables to predict future sales</p>
+                <ul>
+                    <li>
+                        Three past months data
+                    </li>
+                    <li>
+                        Infrastructure: Quality of Infrastructure
+                    </li>
+                    <li>
+                        Logistics: Quality of logistics services
+                    </li>
+                    <li>
+                        Timeliness score: Frequency with which shipments reach the consignee
+                    </li>
+                    <li>
+                        Tracking and tracing score: Ability to track and trace consignments
+                    </li>
+                </ul>
+
+                <p>
+                    And many other variables adapted to your use-case
+                </p>
+
+                <h4>
+                    Accuracy: 80%
+                </h4>
+            </div>
+        </div>
+
+        {% include "includes/footer.html" %}
+    </div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block scripts %}
+<!-- Custom scripts for the blog article -->
+{% endblock scripts %}

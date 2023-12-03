@@ -1,0 +1,234 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+
+      <div class='row'>
+        <div class="col-12">
+          <!-- Tableau Placeholder -->
+          <div class='tableauPlaceholder' id='viz1701593331589' style='position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);'>
+            <noscript><a href='#'><img alt='Dashboard 1 ' src='https://public.tableau.com/static/images/Q8/Q84K5GQS4/1_rss.png' style='border: none; width: 100%; height: auto;' /></a></noscript>
+            <object class='tableauViz'  style='display:none; width: 100%; height: 100%;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                <param name='embed_code_version' value='3' /> 
+                <param name='path' value='shared/Q84K5GQS4' /> 
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/Q8/Q84K5GQS4/1.png' /> 
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='fr-FR' />
+            </object>
+          </div>
+        </div>
+      </div>
+
+      <script type='text/javascript'>
+        var divElement = document.getElementById('viz1701593331589');                    
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        var navbarWidth = 250; // Adjust this value based on your navbar's width
+    
+        function resizeVizElement() {
+            var availableWidth = window.innerWidth - navbarWidth;
+            if (availableWidth > 1000) { // Assuming 1000px is the max width you want for the viz
+                vizElement.style.width = '100%';
+            } else {
+                vizElement.style.width = availableWidth + 'px';
+            }
+            vizElement.style.height = '827px'; // Set the height as needed
+        }
+    
+        window.addEventListener('resize', resizeVizElement);
+        resizeVizElement(); // Call this function to set initial size
+                        
+        var scriptElement = document.createElement('script');                    
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+      </script>
+
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block scripts %}
+
+  <script src="{% static 'js/plugins/chartjs.min.js' %}"></script>
+  <script>
+    var ctx = document.getElementById("chart-bars").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Sales",
+          tension: 0.4,
+          borderWidth: 0,
+          borderRadius: 4,
+          borderSkipped: false,
+          backgroundColor: "#fff",
+          data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
+          maxBarThickness: 6
+        }, ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 15,
+              font: {
+                size: 14,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+              color: "#fff"
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false
+            },
+            ticks: {
+              display: false
+            },
+          },
+        },
+      },
+    });
+
+
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+
+    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+            label: "Mobile apps",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            maxBarThickness: 6
+
+          },
+          {
+            label: "Websites",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#575f9a",
+            borderWidth: 3,
+            backgroundColor: gradientStroke2,
+            fill: true,
+            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+            maxBarThickness: 6
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: '#b2b9bf',
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#b2b9bf',
+              padding: 20,
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+  </script>
+
+{% endblock scripts %}
